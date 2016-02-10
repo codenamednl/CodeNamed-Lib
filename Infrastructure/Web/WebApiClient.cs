@@ -3,7 +3,7 @@ using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace CodeNamed.Infrastructure
+namespace CodeNamed.Infrastructure.Web
 {
     public class WebApiClient : IWebApiClient
     {
@@ -51,14 +51,14 @@ namespace CodeNamed.Infrastructure
             }
         }
 
-        public T Get<T>(string apiRoute, string key)
+        public T Get<T>(string apiRoute, string queryString)
         {
             using (var client = new HttpClient { BaseAddress = new Uri(_backofficeApiUrl) })
             {
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var result = client.GetAsync($"{apiRoute}{key}").Result;
+                var result = client.GetAsync($"{apiRoute}?{queryString}").Result;
 
                 return result.Content.ReadAsAsync<T>().Result;
             }
