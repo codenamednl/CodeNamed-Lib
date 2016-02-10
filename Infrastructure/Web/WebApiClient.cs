@@ -6,14 +6,12 @@ using System.Net.Http.Headers;
 namespace CodeNamed.Infrastructure.Web
 {
     public class WebApiClient : IWebApiClient
-    {
-        readonly string _backofficeApiUrl = ConfigurationManager.AppSettings["WebApiClientUrl"];
-
+    {      
         public T Post<T>(string apiRoute, T entity) where T : class, new()
         {
             try
             {
-                using (var client = new HttpClient { BaseAddress = new Uri(_backofficeApiUrl) })
+                using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -34,7 +32,7 @@ namespace CodeNamed.Infrastructure.Web
         {
             try
             {
-                using (var client = new HttpClient { BaseAddress = new Uri(_backofficeApiUrl) })
+                using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -53,7 +51,7 @@ namespace CodeNamed.Infrastructure.Web
 
         public T Get<T>(string apiRoute, string queryString)
         {
-            using (var client = new HttpClient { BaseAddress = new Uri(_backofficeApiUrl) })
+            using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -66,7 +64,7 @@ namespace CodeNamed.Infrastructure.Web
 
         public T Put<T>(string apiRoute, T entity) where T : new()
         {
-            using (var client = new HttpClient { BaseAddress = new Uri(_backofficeApiUrl) })
+            using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
