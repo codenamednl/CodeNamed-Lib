@@ -2,7 +2,7 @@
 
 namespace CodeNamed.Infrastructure.Logging
 {
-    public interface ILogginProvider
+    public interface ILoggingProvider
     {
         void Error(Exception ex, string customMessage = "");
         void Info(string message);

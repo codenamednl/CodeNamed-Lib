@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace CodeNamed.Infrastructure.Logging
 {
-    public class LogginProvider : ILogginProvider
+    public class LoggingProvider : ILoggingProvider
     {
         public void Error(Exception ex, string customMessage = "")
         {

@@ -50,8 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Logging\ILogginProvider.cs" />
-    <Compile Include="Logging\LogginProvider.cs" />
+    <Compile Include="Logging\ILoggingProvider.cs" />
+    <Compile Include="Logging\LoggingProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Web\IWebApiClient.cs" />
     <Compile Include="Web\WebApiClient.cs" />
