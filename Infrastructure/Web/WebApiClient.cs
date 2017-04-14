@@ -3,17 +3,15 @@ using System.Configuration;
 using System.Net.Http;
 using System.Net.Http.Headers;
 
-namespace CodeNamed.Infrastructure
+namespace CodeNamed.Infrastructure.Web
 {
     public class WebApiClient : IWebApiClient
-    {
-        readonly string _backofficeApiUrl = ConfigurationManager.AppSettings["WebApiClientUrl"];
-
+    {      
         public T Post<T>(string apiRoute, T entity) where T : class, new()
         {
             try
             {
-                using (var client = new HttpClient { BaseAddress = new Uri(_backofficeApiUrl) })
+                using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -34,7 +32,7 @@ namespace CodeNamed.Infrastructure
         {
             try
             {
-                using (var client = new HttpClient { BaseAddress = new Uri(_backofficeApiUrl) })
+                using (var client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Accept.Clear();
                     client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -51,14 +49,14 @@ namespace CodeNamed.Infrastructure
             }
         }
 
-        public T Get<T>(string apiRoute, string key)
+        public T Get<T>(string apiRoute, string queryString)
         {
-            using (var client = new HttpClient { BaseAddress = new Uri(_backofficeApiUrl) })
+            using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                var result = client.GetAsync($"{apiRoute}{key}").Result;
+                var result = client.GetAsync($"{apiRoute}?{queryString}").Result;
 
                 return result.Content.ReadAsAsync<T>().Result;
             }
@@ -66,7 +64,7 @@ namespace CodeNamed.Infrastructure
 
         public T Put<T>(string apiRoute, T entity) where T : new()
         {
-            using (var client = new HttpClient { BaseAddress = new Uri(_backofficeApiUrl) })
+            using (var client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
